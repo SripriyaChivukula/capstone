@@ -1,7 +1,7 @@
 function VegetablesList() {
   return (
     <div>
-      Vegetables Page
+      Beverages 
     </div>
   )
 

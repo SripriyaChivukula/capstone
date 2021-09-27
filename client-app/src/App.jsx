@@ -1,25 +1,55 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route,Link  } from "react-router-dom";
 import axios from "axios";
+import { StyledLink } from "./Style";
+import Profile from "./Profile"
+import Register from "./Register";
+
 
 // Source code imports
 import ItemsList from "./ItemsList";
 import SelectedItems from "./SelectedItems";
 
+import Login from "./Login";
+
 // Our raw data. In a real app we might get this via an API call instead of it being hardcoded.
-const TYPE_NAMES = {
+/* const TYPE_NAMES = {
   fruits: "fruit",
   vegetables: "vegetable",
+}; */
+
+const BAKERYTYPE_NAMES = {
+  snacks: "snacks",
+  beverage: "beverage",
 };
+
+function setToken(userToken) {
+
+  sessionStorage.setItem('token', JSON.stringify(userToken));
+}
+
+function getToken() {
+  const tokenString = sessionStorage.getItem('token');
+  const userToken = JSON.parse(tokenString);
+  return userToken?.token
+}
+
 
 function App(props) {
   // create the react component state we'll use to store our data
-  const [items, setItems] = useState([]);
+  
+  
+  
+  const [items, setItems] = useState([])
+  const [token, setToken] = useState();
+
+  
+  
 
   useEffect(() => {
     axios
-      .get("http://localhost:9999/grocery-items")
+      .get("http://localhost:9999/v1/UserGroup/")
       // handle success
       .then((response) => {
         const data = response.data;
@@ -32,7 +62,12 @@ function App(props) {
       });
   }, []);
 
-  const updateItem = (itemName) => {
+   /*if(!token) {
+    return <Login setToken={setToken} />
+  }*/
+
+
+    const updateItem = (itemName) => {
     console.log("updateItem for ", itemName);
     // Go thru all items; change the desired one; return a new array which has our updated item and all the other items.
     setItems((prevState) => {
@@ -71,23 +106,41 @@ function App(props) {
         <div className="App">
           <h1>Grocery List App</h1>
           <div>
-            <Link to="/">Selected Items</Link>
+            <StyledLink to="/">Selected Items</StyledLink>
           </div>
           <div>
-            <Link to="fruit">Fruits</Link>
+            <StyledLink to="/login">User Login</StyledLink>
           </div>
           <div>
-            <Link to="vegetable">Vegetables</Link>
+            <StyledLink to="/register">Register</StyledLink>
+          </div>
+          <div>
+            <StyledLink to="/profile">Profile</StyledLink>
+          </div>
+          <div>
+            <StyledLink to="fruits">Fruits</StyledLink>
+          </div>
+          <div>
+            <StyledLink to="vegetable">Vegetables</StyledLink>
           </div>
         </div>
         <Switch>
-          <Route path="/fruit">
+          <Route  path="/fruit">
             <ItemsList items={items} type="fruit" updateItem={updateItem} />
           </Route>
-          <Route path="/vegetable">
+          <Route  path="/vegetable">
             <ItemsList items={items} type="vegetable" updateItem={updateItem} />
           </Route>
-          <Route path="/">
+          <Route  path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route  path="/profile">
+            <Profile />
+          </Route>
+          <Route  path="/">
             <SelectedItems items={items} />
           </Route>
         </Switch>

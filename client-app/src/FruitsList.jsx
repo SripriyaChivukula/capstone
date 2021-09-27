@@ -1,7 +1,7 @@
 function FruitsList() {
   return (
     <div>
-      Fruits Page
+     Snacks and Pastries
     </div>
   )
 
