@@ -133,6 +133,7 @@ router.post("/", async (req, res) => {
       email: body.email,
       orderNum: body.orderNum,
     });
+    console.log(newItem);
     newItem
       .save()
       .then(() =>
@@ -185,6 +186,8 @@ router.put("/:username", async (req, res, next) => {
   }
 });
 
+
+
 /* router.delete('/:username', async(req, res, next) => {
     const username = req.params.username
     try{
@@ -228,7 +231,10 @@ router.post("/auth/login", async (req, res) => {
   // console.log(process.env.SECRET)
   const token = jwt.sign(userForToken, "meowww");
 
-  res.status(200).send({ token, username: user.username });
+  res
+    .status(200)
+    .send({ token, username: user.username });
+    
 });
 
 /* router.get("/bakeryitems/:itemtype", (req, res) => {

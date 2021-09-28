@@ -1,12 +1,11 @@
 .App {
   text-align: center;
-  background-image: "url(" + "bakerydoodle.jpeg" + ")";
-  height: 500px;
+  background-image: "url(" + "bakerybackground.jpeg" + ")";
+  height: 1000px;
   background-size: cover;
 }
 
 .hv-center {
-  
   display: flex;
   justify-content: center;
   align-items: center;

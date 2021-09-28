@@ -24,10 +24,8 @@ const userGroupSchema = new mongoose.Schema({
     //unique: true,
     
   },
-  orderNum: {
-  type: Number,
-  //unique: true,
-  }
+  
+  purchases: [{ date: String, itemName: String }]
 });
 
 const UserGroup_Item = mongoose.model('UserGroupSchema', userGroupSchema);

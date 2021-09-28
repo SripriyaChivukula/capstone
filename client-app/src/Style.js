@@ -10,7 +10,7 @@ export const StyledLink = styled(Link)`
   margin-right: 5px;
   align-items:flex-start;
   margin-left: 20px;
-  line-height: 50px;
+  line-height: 30px;
   font-size:20px;
 
   &:hover {

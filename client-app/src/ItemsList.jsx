@@ -7,11 +7,12 @@ function ItemsList({ items, type, updateItem }) {
   console.log(items);
   console.log(type);
 
-  const filteredItems = items.filter((item) => item.type === type);
-  console.log(filteredItems);
+  const filteredItems = items.filter((item) => item.itemtype === type);
+  console.log("Filterd Items", filteredItems);
 
   return (
-    <div>
+    <div className ="bakeryclass">
+    <div className ="subtitles">
       {type} List
       <ul>
         {filteredItems.map((item, index) => (
@@ -20,6 +21,7 @@ function ItemsList({ items, type, updateItem }) {
           </div>
         ))}
       </ul>
+    </div>
     </div>
   );
 }

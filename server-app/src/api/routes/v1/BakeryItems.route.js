@@ -55,31 +55,12 @@ const router = express.Router();
  * @apiError (Bad Request 400)
  */
 
-/*router.get('/:username&:password', (req, res) => {
-  const username = req.params.username;
-  const password = req.params.password;
-
-  if(( username == 'username') && (password == 'password')) {
-    const formatItems = items => items.map(item => ({ username: item.username, email: item.email, orderNum:item.orderNum }));
-    UserGroup_Item
-      .find({ username: 'username', password:'password'})
-      .then(desiredItems => res.send(formatItems(desiredItems)))
-      // Error handling
-      .catch(error => res.send(`Error - ${JSON.stringify(error)}`));
-  }
-
-  else {
-    res.send(`Invalid route - ${req.path}. Valid routes are 'snacks', 'beverages'`)
-  }
-})*/
-
-// TODO: Add apidoc documentation
-//move bakeryitems route off the user group route
 router.get("/", (req, res) => {
   console.log("hello bakeryitems");
-  BakeryGroup_Item.find()
+  BakeryGroup_Item
+    .find()
     .then((allBakeryGroup_Item) => {
-      // const formattedItems = allBakeryGroup_Item.map(item => ({ name: item.name , itemtype: item.itemtype, price: item.price }));
+     const formattedItems = allBakeryGroup_Item.map(item => ({ name: item.name , itemtype: item.itemtype, price: item.price }));
       console.log("hello", allBakeryGroup_Item);
       res.send(allBakeryGroup_Item);
     })

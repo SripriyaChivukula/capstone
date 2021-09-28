@@ -5,7 +5,7 @@ export default function Header(props){
         <header className="row block center">
             <div>
                 <a href="#">
-                    <h1>Rent-a-Book-Store</h1>
+                    <h1>The Cookie Jar</h1>
                 </a>
             </div>
         </header>
