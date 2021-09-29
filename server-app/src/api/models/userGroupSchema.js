@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 /**
  * Mongoose Model for our MongoDB Collection
@@ -17,17 +17,17 @@ const userGroupSchema = new mongoose.Schema({
   password: {
     type: String,
     // This prevents duplicate documents w/the exact same info from being created for this model.
-    required:true
+    required: true,
   },
   email: {
     type: String,
     //unique: true,
-    
   },
-  
-  purchases: [{ date: String, itemName: String }]
+  orderNum: {
+    type: Number,
+  },
 });
 
-const UserGroup_Item = mongoose.model('UserGroupSchema', userGroupSchema);
+const UserGroup_Item = mongoose.model("UserGroupSchema", userGroupSchema);
 
 module.exports = UserGroup_Item;

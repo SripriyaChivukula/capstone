@@ -166,38 +166,36 @@ router.post("/", async (req, res) => {
       .catch(error => res.send(`ERROR: Undable to create ${JSON.stringify(req.body)} user. Err is ${JSON.stringify(error)}`));
   })*/
 
-router.put("/:username", async (req, res, next) => {
+router.put("/:username", (req, res, next) => {
   //const username = req.body.username
   const username = req.params.username;
-  const newpassword = req.body;
+  const body = req.body;
   const option = { new: true };
+  const saltRounds = 10;
 
-  console.log(username);
+  console.log("hello from put", username);
   // create mongoose GroceryItem model instance. we can then save this to mongodb as a document
-  try {
-    const newItem = await UserGroup_Item.findOneAndUpdate(
-      { username },
-      newpassword,
-      option
-    );
-    res.send(newItem);
-  } catch (error) {
-    console.log(error);
-  }
+
+  bcrypt.hash(body.password, saltRounds, (err, passwordHash) => {
+    // create mongoose GroceryItem model instance. we can then save this to mongodb as a document
+    try {
+      const newItem = UserGroup_Item.findOneAndUpdate({ username },passwordHash,option);
+      res.send(newItem);
+    } catch (error) {
+      console.log(error);
+    }
+  });
 });
 
-
-
-/* router.delete('/:username', async(req, res, next) => {
-    const username = req.params.username
-    try{
-       const result = await UserGroup_Item.findOneAndDelete(username);
-       res.send(result);
-    }
-    catch(err){
-        console.log(err.message);
-    }
-  });*/
+router.delete("/:username", async (req, res, next) => {
+  const username = req.params.username;
+  try {
+    const result = await UserGroup_Item.findOneAndDelete(username);
+    res.send(result);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
 
 router.post("/auth/login", async (req, res) => {
   const username = req.body.username;
@@ -231,10 +229,7 @@ router.post("/auth/login", async (req, res) => {
   // console.log(process.env.SECRET)
   const token = jwt.sign(userForToken, "meowww");
 
-  res
-    .status(200)
-    .send({ token, username: user.username });
-    
+  res.status(200).send({ token, username: user.username });
 });
 
 /* router.get("/bakeryitems/:itemtype", (req, res) => {
