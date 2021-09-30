@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: "url(" + "bakerybackground.jpeg" + ")";
+  background-image: "url(" + "bakerycookie.jpg" + ")";
   height: 1000px;
   background-size: cover;
 }
@@ -9,4 +9,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.navbar
+{
+  display:inline-flex;
+  color:white
 }

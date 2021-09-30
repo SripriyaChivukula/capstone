@@ -166,25 +166,29 @@ router.post("/", async (req, res) => {
       .catch(error => res.send(`ERROR: Undable to create ${JSON.stringify(req.body)} user. Err is ${JSON.stringify(error)}`));
   })*/
 
-router.put("/:username", (req, res, next) => {
+router.put("/:username", async (req, res, next) => {
   //const username = req.body.username
   const username = req.params.username;
   const body = req.body;
+  const password = body.password;
+  console.log(password);
   const option = { new: true };
   const saltRounds = 10;
 
   console.log("hello from put", username);
   // create mongoose GroceryItem model instance. we can then save this to mongodb as a document
 
-  bcrypt.hash(body.password, saltRounds, (err, passwordHash) => {
-    // create mongoose GroceryItem model instance. we can then save this to mongodb as a document
-    try {
-      const newItem = UserGroup_Item.findOneAndUpdate({ username },passwordHash,option);
-      res.send(newItem);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  // create mongoose GroceryItem model instance. we can then save this to mongodb as a document
+  try {
+    const newItem = await UserGroup_Item.findOneAndUpdate(
+      {username},
+      password,
+      option
+    );
+    res.send(newItem);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 router.delete("/:username", async (req, res, next) => {

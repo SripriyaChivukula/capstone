@@ -1,6 +1,6 @@
 body {
   font-family:Papyrus ;
-  background-image: url("bakerybackground.jpeg");
+  background-image: url("bakerycookie.jpg");
 
   height: 1200px;
   background-position: center;
@@ -15,7 +15,7 @@ h3 {
 h1 {
   font-family: Papyrus;
   font-size: 4rem;
-  background-color: black;
+  
   color:white;
 }
 h2 {
@@ -29,13 +29,14 @@ a {
 }
 
 .nav {
-  color: #000;
+  color:white;
+  display:inline;
   line-height: 30px;
 }
 
 .row {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
@@ -92,6 +93,7 @@ a {
 }
 .block {
   background-color:cadetblue;
+  max-height:70px;
   padding: 1rem;
   margin: 0.5rem;
   border-radius: 0.5rem;
@@ -127,4 +129,11 @@ button {
   height: 300px;
   width: 100%;
   background-color: rgb(100, 69, 28);
+}
+#intro{
+  
+  display:inline-flex;
+  background-color:cadetblue;
+  width: 500px;
+  color:black;
 }

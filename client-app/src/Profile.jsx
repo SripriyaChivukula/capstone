@@ -5,6 +5,7 @@ import {useState,useEffect} from "react";
 function Profile({ username }) {
   const [userProfile,setUserProfile]=useState();
   const [password,setPassword]= useState();
+  const [userDelete,setUserDelete]=useState(false);
   const username1 = username;
   console.log(username1)
   console.log(userProfile)
@@ -44,8 +45,11 @@ function Profile({ username }) {
     })
       .then(response => response.json())
       .then((data) => {
-           console.log("the data",data)
-           setUserProfile(data)
+           console.log("info of deleted user",data)
+           if(data)
+           {
+           setUserDelete(true);
+           }
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -53,6 +57,7 @@ function Profile({ username }) {
 
 
   }
+  
 
   async function UpdateUser(credentials) {
     return fetch(`http://localhost:9999/v1/usergroup/${username}`, {
@@ -75,6 +80,7 @@ function Profile({ username }) {
         password,   
     });
   }
+  
   
 
   if(!userProfile){
@@ -102,12 +108,16 @@ function Profile({ username }) {
             <Button variant="primary" type="submit" name ="view profile" onClick={handleUser}>UpdatePassword</Button>
             
               
-              <Form.Control type="text" placeholder="Enter new Password" onChange={e => setPassword(e.target.value)} />
+              <Form.Control type="password" placeholder="Enter new Password" onChange={e => setPassword(e.target.value)} />
             
             <br />
             <Button variant="primary" type="submit" name ="delete" onClick={DeleteUser}>
               Delete Account
             </Button>
+           <Form.Group className="mb-3" controlId="formUserName">
+              <Form.Label>{username} Account Deleted: {userDelete ? "was successful" : null} </Form.Label>
+              <br />
+            </Form.Group>
           </Form>
         </div>
       </div>

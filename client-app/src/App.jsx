@@ -1,8 +1,8 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link,Nav } from "react-router-dom";
 import axios from "axios";
-import { StyledLink } from "./Style";
+import { StyledLink,StyledNav } from "./Style";
 import Profile from "./Profile";
 import Register from "./Register";
 import Header from "./Header";
@@ -103,7 +103,7 @@ function App(props) {
           <Header />
         </div>
         <Router>
-          <nav>
+          <nav className = "navbar">
             <StyledLink to="/">Home</StyledLink>
             <StyledLink to="/Login">Login</StyledLink>
             <StyledLink to="/Register">Register</StyledLink>
@@ -141,7 +141,13 @@ function App(props) {
             </Route>
           </Switch>
         </Router>
+        <div id="intro"><h2>
+             <p>Need a quick Snack or Coffee!!..</p>
+             <p>You are at Right Place.</p>
+            <p>Place an Order and Relax.</p>
+           <p> You will be served right away!!</p> </h2></div>
       </div>
+     
     );
   }
 }
